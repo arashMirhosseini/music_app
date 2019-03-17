@@ -1,11 +1,10 @@
-# README
+## Music App 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### This is a Ruby on Rails project
 
-Things you may want to cover:
+This is a multi-user inventory app 
 
-* Ruby version
+* Rails version used: 5.2.2
 
 * System dependencies
 

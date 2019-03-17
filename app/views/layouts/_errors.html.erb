@@ -1,0 +1,11 @@
+<% if flash.now[:errors] %>
+  <% if flash.now[:errors].is_a?(String)%>
+    <%= flash.now[:errors]%>
+  <%else%>
+    <% flash.now[:errors].each do |error| %>
+    <%= error %>
+    <br>
+    <% end %>
+  <%end%>
+  
+<% end %>

@@ -1,0 +1,45 @@
+
+<% action = album.persisted? ? album_url(album) : albums_url %>
+<% method = album.persisted? ? "PATCH" : "POST" %>
+<% title = album.persisted? ? album.title : "" %>
+<% yr = album.persisted? ? album.year : "" %>
+<% button = album.persisted? ? "Update" : "Add" %>
+
+<form action="<%= action %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="album[title]" value="<%=title%>">
+  <br>
+
+  <label for="year">Year</label>
+  <input id="year" type="text" name="album[year]" value="<%= yr%>">
+  <br>
+
+  <label for="band">Band</label>
+  <select id="band" name="album[band_id]">
+
+    <% bands.each do |band| %>
+      <% selected = "selected" if band.id.to_s == params[:band_id] %>
+
+      <option value="<%= band.id%>"
+        <%= selected %> ><%=band.name %></option>
+    <% end %>
+  </select>
+  <br>
+
+  <label>
+    <% Album::KIND.each do |kind| %>
+      <input type="radio"
+       <%= "checked" if album.kind == kind %>
+       name="album[kind]"
+       value="<%=kind%>">
+      <%= kind.upcase %>
+    <% end %>
+  </label>
+  <br>
+
+  <input type="submit" value="<%=button %>">
+
+</form>

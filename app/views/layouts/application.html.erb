@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style media="screen">
+
+      <!-- RESET -->
+      html, head,
+      header, h1, h2, body, 
+      main, nav, p, form, input {
+        margin: 0;
+        padding: 0;
+        border: 0;
+
+        font-family: sans-serif;
+        font-size: inherit;
+        text-decoration: inherit;
+        color: inherit;
+
+        background: transparent; 
+      }
+
+      body {
+        background: black;
+      }
+
+      header {
+        # border: 2px solid orange;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        height: 150px;
+      }
+
+      .main-content {
+        display: flex;
+        # border: 3px solid red;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        align-items: center;
+        background: gray;
+        width: 900px;
+        min-height: 100vh;
+        margin: 10px auto;
+      }
+
+      .title {
+        # border: 2px solid blue; 
+        display: flex; 
+        justify-content: center; 
+        align-items: flex-start;
+        font-family: Comic Sans MS;
+        font-size: 75px;
+        color: #FDDB61;
+        width: 900px;
+        height: 140px;
+      }
+
+      .form-container {
+        display: flex;
+        flex-flow: column wrap;
+        # border: 4px solid blue; 
+        justify-content: flex-start;
+        align-items: center;
+        width: 380px;
+        height: 200px;
+
+      }
+
+      label {
+        color: white;
+        font-family: sans-serif;
+      }
+
+      input {
+        font-family: sans-serif;
+        font-size: 18px;
+      }
+
+      nav {
+        display: flex;
+        flex-flow: row wrap;
+        /* This aligns items to the end line on main-axis */
+        justify-content: flex-end;
+        # border: 3px solid green;
+        width: 900px;
+        height: 60px;
+      }
+      
+      nav > a {
+        display: block;
+        border-radius: 5px;
+        # border: 1px solid red;
+        background-color: skyblue;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+        color: #000;
+      }
+
+      .button {
+        display: flex;
+        border-radius: 5px;
+        # border: none;
+        background-color: skyblue;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+        color: #000;
+        justify-content: center;
+        width: 150px;
+      }
+
+      .page-header {
+        # border: 3px solid red;
+        padding: 5px;
+        display: flex; 
+        justify-content: center;
+        font-size: 40px;
+        color: #39BAAC;
+        font-family: 'Raleway', sans-serif;
+      }
+
+    </style>
+  </head>
+  
+  
+  <body>
+    <div class="main-content">
+      <header>
+        <h1 class="title">Music App</h1>
+        <nav>
+          <% if current_user.nil? %>
+            <a href="<%= new_session_url %>">Sign in</a>
+            <a href="<%= new_user_url %>">Sign up</a>
+          <% else %>
+            <p>Logged in as <%= current_user.email %></p>
+            <form action="<%= session_url %>" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <%= auth_token %>
+
+              <input class="button" type="submit" value="log out">
+            </form>
+          <% end %>
+        </nav>
+        
+      </header>
+
+      <main>
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

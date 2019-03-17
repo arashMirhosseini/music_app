@@ -1,0 +1,14 @@
+
+<h2>New Note</h2>
+<form action="<%= notes_url %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="note[track_id]" value="<%=track.id %>">
+
+  <label for="comment">Content</label>
+  <textarea id="comment" name="note[comment]" rows="8" cols="80">
+  </textarea>
+  <br>
+
+  <input type="submit" value="Submit">
+
+</form>

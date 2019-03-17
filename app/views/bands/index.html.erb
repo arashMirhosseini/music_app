@@ -1,0 +1,14 @@
+<a
+  style="display: flex; flex-direction: column; align-items: flex-end"
+   href="<%=new_band_url  %>">New Band</a>
+<h1>All Bands</h1>
+
+<% @bands.each do |band| %>
+
+  <a href="<%= band_url(band) %>">
+    <%= band.name %>
+  </a>
+
+
+<% end %>
+<br>
